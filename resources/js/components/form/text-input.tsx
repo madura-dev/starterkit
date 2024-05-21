@@ -15,7 +15,8 @@ type TextInputProps = {
    className?: string
    onChange: (value: string) => void
    iconPosition?: 'start' | 'end',
-   required?: boolean
+   required?: boolean,
+   type?: string
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInput(props, ref) {
@@ -28,6 +29,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 	  icon,
 	  className,
 	  onChange,
+	  type = 'text',
 	  iconPosition = 'start',
 	  ...otherProps
    } = props
@@ -56,8 +58,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 							className={cn('peer border-0 focus-visible:ring-0 shadow-none', className)}
 							id={name}
 							name={name}
-							{...otherProps}
 							onChange={e => onChange(e.target.value)}
+							{...otherProps}
 						/>
 						<span className="input-icon-addon h-100 bg-slate-100 p-1 px-3 rounded-sm">{icon}</span>
 					 </div>
