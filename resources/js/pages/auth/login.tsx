@@ -1,96 +1,92 @@
-import { useEffect, FormEventHandler } from 'react';
-import Checkbox from '@/components/checkbox';
-import GuestLayout from '@/layouts/GuestLayout';
-import InputError from '@/components/input-error';
-import InputLabel from '@/components/input-label';
-import PrimaryButton from '@/components/primary-button';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { FormEventHandler, Fragment, useEffect } from 'react';
+import GuestLayout from '@/layouts/guest';
+import { Head, useForm } from '@inertiajs/react';
 import TextInput from "@/components/form/text-input";
+import { Label } from "@/components/ui/label";
+import { IconKey, IconUser } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
+import TextareaInput from "@/components/form/textarea-input";
+import SwitchInput from "@/components/form/switch-input";
+import CheckboxInput from "@/components/form/checkbox-input";
+import RadioGroup from "@/components/form/radio-input";
+import RadioGroupInput from "@/components/form/radio-input";
+import SelectInput from "@/components/form/select-input";
 
-export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
+const Login = ({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) => {
+   const { data, setData, post, processing, errors, reset } = useForm({
+	  email: '',
+	  password: '',
+	  remember: false,
+   });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+   useEffect(() => {
+	  return () => {
+		 reset('password');
+	  };
+   }, []);
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+   const submit: FormEventHandler = (e) => {
+	  e.preventDefault();
 
-        post(route('login'));
-    };
+	  post(route('login'));
+   };
 
-    return (
-        <GuestLayout>
-            <Head title="Log in" />
+   return (
+	   <Fragment>
+		  <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+		  {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+		  <form onSubmit={submit}>
+			 <div className="form-group">
+				<Label htmlFor="email">Email</Label>
+				<TextInput
+					name={'email'}
+					icon={<IconUser stroke={1} />}
+					errors={errors.email}
+					onChange={(e) => setData('email', e.target.value)}
+				/>
+			 </div>
+			 <div className="form-group">
+				<Label htmlFor="email">Password</Label>
+				<TextInput
+					name={'password'} icon={<IconKey stroke={1} />} errors={errors.password} type={'password'}
+					onChange={(e) => setData('password', e.target.value)}
+				/>
+			 </div>
+			 <div className="form-group">
+				<TextareaInput name={'keterangan'} />
+			 </div>
+			 <div className="form-group">
+				<SwitchInput name={'remember'} />
+			 </div>
 
-                    <TextInput
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(value) => setData('email', value)}
-                    />
+			 <div className="form-group">
+				<CheckboxInput label={'Setuju'} value={'Setuju'} name={'aggrement'} />
+			 </div>
+			 <div className="form-group">
+				<Label>Pilih Terbaik</Label>
+				<RadioGroupInput name={'hover'} defaultValue={''} onChange={(value) => alert(value)}>
+				   <RadioGroupInput.Item value={'1'} label={'Option 1'} />
+				   <RadioGroupInput.Item value={'2'} label={'Option 2'} />
+				   <RadioGroupInput.Item value={'3'} label={'Option 3'} />
+				</RadioGroupInput>
+			 </div>
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+			 <div className="form-group">
+				<SelectInput options={[]} variant={'select2'} name={'negara'} onSelect={(value) => setData('email', value)} placeholder={'Pilih Negara Anda'} >
+				   <SelectInput.Item value={'Indonesia'} label={'Indonesia'}/>
+				</SelectInput>
+			 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+			 <div className="form-group">
+				<Button>Login</Button>
+			 </div>
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+		  </form>
+	   </Fragment>
+   );
 }
+
+Login.layout = (page: any) => <GuestLayout>{page}</GuestLayout>;
+export default Login;
