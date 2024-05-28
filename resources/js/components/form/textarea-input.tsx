@@ -20,7 +20,7 @@ const TextareaInput = forwardRef<HTMLTextAreaElement, TextareaInputProps>(functi
 		  <Textarea
 			  id={name}
 			  placeholder={placeholder}
-			  className={cn(errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : '')}
+			  className={cn('ease-in-out transition duration-500 focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-primary',errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : '')}
 			  {...otherProps}
 		  />
 		  {errors && (

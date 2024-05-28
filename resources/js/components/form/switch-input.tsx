@@ -15,7 +15,7 @@ const SwitchInput = forwardRef<HTMLInputElement, SwitchInputProps>(function Swit
    } = props
 
    return (
-	   <div className="grid w-full max-w-sm items-center gap-1.5">
+	   <div className="grid max-w-sm items-center gap-1.5">
 		  <Switch
 			  name={name}
 			  checked={value}

@@ -1,10 +1,9 @@
-import React, { FC, forwardRef, Fragment } from "react";
+import React, { FC } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { IconCheck, IconCircleCheck } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 type SelectInputProps = {
@@ -51,7 +50,7 @@ const SelectInput: React.FC<SelectInputProps> & { Item: FC<SelectItemProps> } = 
 				<Button
 					variant="outline"
 					role="combobox"
-					className="w-full justify-between"
+					className={cn('w-full justify-between')}
 				>
 				   {value
 					   ? options.find((option) => option.value === value)?.label

@@ -2,15 +2,9 @@ import { FormEventHandler, Fragment, useEffect } from 'react';
 import GuestLayout from '@/layouts/guest';
 import { Head, useForm } from '@inertiajs/react';
 import TextInput from "@/components/form/text-input";
-import { Label } from "@/components/ui/label";
-import { IconKey, IconUser } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import TextareaInput from "@/components/form/textarea-input";
+import { Label } from "@/components/ui/label";
 import SwitchInput from "@/components/form/switch-input";
-import CheckboxInput from "@/components/form/checkbox-input";
-import RadioGroup from "@/components/form/radio-input";
-import RadioGroupInput from "@/components/form/radio-input";
-import SelectInput from "@/components/form/select-input";
 
 const Login = ({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) => {
    const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,51 +30,42 @@ const Login = ({ status, canResetPassword }: { status?: string, canResetPassword
 		  <Head title="Log in" />
 
 		  {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
+		  <div className="login-page-title mb-3">
+			 <h1 className={'text-primary text-2xl font-bold'}>Login<span className={'text-2xl text-yellow-300'}>.</span>
+			 </h1>
+			 <p className={'text-sm'}>Selamat Datang Kembali</p>
+		  </div>
 		  <form onSubmit={submit}>
 			 <div className="form-group">
 				<Label htmlFor="email">Email</Label>
 				<TextInput
-					name={'email'}
-					icon={<IconUser stroke={1} />}
+					type="email"
+					name="email"
 					errors={errors.email}
-					onChange={(e) => setData('email', e.target.value)}
+					placeholder="Masukan Email"
+					onChange={(event) => setData('email', event.target.value)}
+					value={data.email}
 				/>
 			 </div>
 			 <div className="form-group">
-				<Label htmlFor="email">Password</Label>
+				<Label htmlFor={'password'}>Password</Label>
 				<TextInput
-					name={'password'} icon={<IconKey stroke={1} />} errors={errors.password} type={'password'}
-					onChange={(e) => setData('password', e.target.value)}
+					type="password"
+					name="password"
+					errors={errors.password}
+					placeholder="Masukan Password"
+					onChange={(event) => setData('password', event.target.value)}
+					value={data.password}
 				/>
 			 </div>
-			 <div className="form-group">
-				<TextareaInput name={'keterangan'} />
-			 </div>
-			 <div className="form-group">
-				<SwitchInput name={'remember'} />
-			 </div>
-
-			 <div className="form-group">
-				<CheckboxInput label={'Setuju'} value={'Setuju'} name={'aggrement'} />
-			 </div>
-			 <div className="form-group">
-				<Label>Pilih Terbaik</Label>
-				<RadioGroupInput name={'hover'} defaultValue={''} onChange={(value) => alert(value)}>
-				   <RadioGroupInput.Item value={'1'} label={'Option 1'} />
-				   <RadioGroupInput.Item value={'2'} label={'Option 2'} />
-				   <RadioGroupInput.Item value={'3'} label={'Option 3'} />
-				</RadioGroupInput>
-			 </div>
-
-			 <div className="form-group">
-				<SelectInput options={[]} variant={'select2'} name={'negara'} onSelect={(value) => setData('email', value)} placeholder={'Pilih Negara Anda'} >
-				   <SelectInput.Item value={'Indonesia'} label={'Indonesia'}/>
-				</SelectInput>
-			 </div>
-
-			 <div className="form-group">
-				<Button>Login</Button>
+			 <div className="login-footer flex justify-between mt-6">
+				<div className="checkbox-wrapper flex gap-2 items-center">
+				   <SwitchInput name={'remember'}/>
+				   <Label htmlFor={'remember'}>Remember Me</Label>
+				</div>
+				<div className="button-wrapper">
+				   <Button>Login</Button>
+				</div>
 			 </div>
 
 		  </form>

@@ -21,12 +21,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 	  return (
 		  <div className="grid w-full max-w-sm items-center gap-1.5">
 			 <div className="inner-input flex gap-2 items-center relative">
-				<span className="input-icon bg-slate-50 border min-h-[80%] border-slate-100 w-auto flex items-center px-1 m-1 rounded-sm absolute">{icon}</span>
+				<span className="input-icon bg-slate-50 border min-h-[80%] border-slate-100 w-auto flex items-center px-2 m-1 rounded-sm absolute">{icon}</span>
 				<Input
 					type={type}
 					id={name}
 					className={cn(
-						'ps-12 ',
+						'ps-12 transition ease-in-out duration-200 border focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-primary disabled:cursor-not-allowed',
 						errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : ''
 					)}
 					placeholder={placeholder}
@@ -46,7 +46,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 					type={type}
 					id={name}
 					className={cn(
-						'ps-12 ',
+						'ps-12 transition ease-in-out duration-200 border focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-primary disabled:cursor-not-allowed ',
 						errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : ''
 					)}
 					placeholder={placeholder}
@@ -67,8 +67,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 				 id={name}
 				 placeholder={placeholder}
 				 className={cn(
-					 'ps-12 ',
-					 errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : ''
+					 'transition ease-in-out duration-200 border focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-primary disabled:cursor-not-allowed',
+					 errors ? 'transition ease-in-out duration-200 border border-rose-500 focus-visible:ring focus-visible:ring-rose-200 focus-visible:outline focus-visible:outline-rose-200 focus-visible:border focus-visible:border-rose-500' : ''
 				 )}
 				 {...otherProps}
 			 />
