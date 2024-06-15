@@ -26,7 +26,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function TextInpu
 					type={type}
 					id={name}
 					className={cn(
-						'ps-12 transition ease-in-out duration-200 border focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-primary disabled:cursor-not-allowed',
+						'ps-12 transition ease-in-out duration-200 border focus-visible:ring focus-visible:ring-slate-200 focus-visible:outline focus-visible:outline-slate-200 focus-visible:border focus-visible:border-slate-700 disabled:cursor-not-allowed',
 						errors ? 'border-rose-400 focus-visible:ring-1 focus-visible:ring-rose-500' : ''
 					)}
 					placeholder={placeholder}
