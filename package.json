@@ -64,6 +64,7 @@
         "@radix-ui/react-toggle-group": "^1.1.0",
         "@radix-ui/react-tooltip": "^1.1.2",
         "@tabler/icons-react": "^3.4.0",
+        "@tiptap-pro/extension-unique-id": "^2.10.7",
         "@tiptap/pm": "^2.5.8",
         "@tiptap/react": "^2.5.8",
         "@tiptap/starter-kit": "^2.5.8",
