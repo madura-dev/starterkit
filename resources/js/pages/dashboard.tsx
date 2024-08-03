@@ -1,13 +1,13 @@
-import Authenticated from "@/layouts/authenticated";
-import { Fragment } from "react";
+import Authenticated from '@/layouts/authenticated'
+import { Fragment } from 'react'
 
 const Dashboard = () => {
-    return (
-        <Fragment>
-            <h1>Dashboard</h1>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+        <h1>Dashboard</h1>
+    </Fragment>
+  )
 }
 
 Dashboard.layout = (page: any) => <Authenticated>{page}</Authenticated>
-export default Dashboard;
+export default Dashboard
