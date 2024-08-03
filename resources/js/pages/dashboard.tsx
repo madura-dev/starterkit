@@ -1,10 +1,11 @@
 import Authenticated from '@/layouts/authenticated'
 import { Fragment } from 'react'
+import BlockEditor from "@/components/editor/block-editor";
 
 const Dashboard = () => {
   return (
     <Fragment>
-        <h1>Dashboard</h1>
+        <BlockEditor/>
     </Fragment>
   )
 }
