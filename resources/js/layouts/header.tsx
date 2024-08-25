@@ -1,25 +1,18 @@
 import {
+  IconBell,
   IconChartLine,
   IconHome,
   IconMenu,
   IconPackage,
-  IconSearch,
   IconShoppingCart,
   IconUser,
   IconUserCircle,
-} from '@tabler/icons-react'
-import { Link } from '@inertiajs/react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet.js'
-import { Button } from '@/components/ui/button.js'
-import { Badge } from '@/components/ui/badge.js'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card.js'
-import TextInput from '@/components/form/text-input.js'
+} from '@tabler/icons-react';
+import { Link, router } from '@inertiajs/react';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet.js';
+import { Button } from '@/components/ui/button.js';
+import { Badge } from '@/components/ui/badge.js';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.js';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,11 +20,37 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu.js'
+} from '@/components/ui/dropdown-menu.js';
+import React from 'react';
+import { toast } from 'sonner';
 
-export default function Header() {
+export default function Header({ title }: { title: string }) {
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const logout = new Promise((resolve, reject) => {
+      router.visit(route('logout'), {
+        method: 'post',
+        preserveState: true,
+        onSuccess: () => {
+          resolve(true);
+        },
+        onError: () => {
+          reject(false);
+        },
+        onFinish: () => {
+          router.visit(route('login'));
+        },
+      });
+    });
+
+    toast.promise(logout, {
+      loading: 'Logout...',
+      success: 'Logout Berhasil',
+      error: 'Logout Gagal',
+    });
+  };
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-white px-4 lg:h-[60px] lg:px-6">
+    <header className="flex sticky top-0 z-40 h-14 items-center gap-4 border-b border-slate-100 bg-white px-4 lg:h-[60px] lg:px-6">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -41,10 +60,7 @@ export default function Header() {
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
+            <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
               <IconPackage className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
@@ -61,9 +77,7 @@ export default function Header() {
             >
               <IconShoppingCart className="h-5 w-5" />
               Orders
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                6
-              </Badge>
+              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">6</Badge>
             </Link>
             <Link
               href="#"
@@ -92,8 +106,7 @@ export default function Header() {
               <CardHeader>
                 <CardTitle>Upgrade to Pro</CardTitle>
                 <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
+                  Unlock all features and get unlimited access to our support team.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -106,20 +119,13 @@ export default function Header() {
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <form>
-          <div className="relative">
-            <TextInput
-              icon={<IconSearch size={14} />}
-              name={'search'}
-              placeholder="Search products..."
-            />
-          </div>
-        </form>
+        <h2 className={'text-sm md:text-xl font-semibold text-slate-700 relative'}>{title}</h2>
       </div>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
-            <IconUserCircle className="h-5 w-5" />
+            <IconBell stroke={1.25} className="h-5 w-5" />
             <span className="sr-only">Toggle user menu</span>
           </Button>
         </DropdownMenuTrigger>
@@ -132,6 +138,27 @@ export default function Header() {
           <DropdownMenuItem>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger asChild>
+          <div className="user-pane hover:bg-slate-50 p-2 group cursor-pointer flex items-center justify-start gap-2">
+            <Button variant="secondary" size="icon" className="rounded-full">
+              <IconUserCircle stroke={1.25} className="h-5 w-5" />
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+            Abd. Asis
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Informasi Akun</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={e => handleLogout(e)} className={'text-destructive cursor-pointer'}>
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </header>
-  )
+  );
 }

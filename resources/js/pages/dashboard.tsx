@@ -1,14 +1,11 @@
 import Authenticated from '@/layouts/authenticated'
-import { Fragment } from 'react'
-import BlockEditor from "@/components/editor/block-editor";
+import React, { Fragment } from 'react'
 
 const Dashboard = () => {
-  return (
-    <Fragment>
-        <BlockEditor/>
-    </Fragment>
-  )
+  return <Fragment></Fragment>
 }
 
-Dashboard.layout = (page: any) => <Authenticated>{page}</Authenticated>
+Dashboard.layout = (page: React.ReactNode) => (
+  <Authenticated children={page} title={'Header'} />
+)
 export default Dashboard
