@@ -18,15 +18,21 @@ export default function Authenticated({
   title: string
 }>) {
   return (
-    <div className="grid min-h-screen md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <Sidebar />
-      <div className="flex flex-col">
-        <Header title={title} />
-        <Head title={title} />
-        <main className="flex flex-1 min-h-[85vh] flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          {children}
-        </main>
-        <Footer />
+    <>
+      <div className="grid min-h-screen md:grid-cols-[220px_1fr] lg:grid-cols-[260px_1fr]">
+        <div className="hidden text-slate-800 md:block">
+          <div className="flex md:max-w-[220px] lg:max-w-[260px] bg-[#F3F4F6] fixed h-full max-h-screen flex-col gap-2">
+            <Sidebar />
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <Header title={title} />
+          <Head title={title} />
+          <main className="flex flex-1 min-h-[85vh] flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </div>
       <Toaster
         position={'top-center'}
@@ -43,6 +49,6 @@ export default function Authenticated({
           },
         }}
       />
-    </div>
+    </>
   )
 }

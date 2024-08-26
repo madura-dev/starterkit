@@ -7,12 +7,18 @@ import {
   IconShoppingCart,
   IconUser,
   IconUserCircle,
-} from '@tabler/icons-react';
-import { Link, router } from '@inertiajs/react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet.js';
-import { Button } from '@/components/ui/button.js';
-import { Badge } from '@/components/ui/badge.js';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.js';
+} from '@tabler/icons-react'
+import { Link, router } from '@inertiajs/react'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet.js'
+import { Button } from '@/components/ui/button.js'
+import { Badge } from '@/components/ui/badge.js'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card.js'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,35 +26,35 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu.js';
-import React from 'react';
-import { toast } from 'sonner';
+} from '@/components/ui/dropdown-menu.js'
+import React from 'react'
+import { toast } from 'sonner'
 
 export default function Header({ title }: { title: string }) {
   const handleLogout = (e: React.MouseEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     const logout = new Promise((resolve, reject) => {
       router.visit(route('logout'), {
         method: 'post',
         preserveState: true,
         onSuccess: () => {
-          resolve(true);
+          resolve(true)
         },
         onError: () => {
-          reject(false);
+          reject(false)
         },
         onFinish: () => {
-          router.visit(route('login'));
+          router.visit(route('login'))
         },
-      });
-    });
+      })
+    })
 
     toast.promise(logout, {
       loading: 'Logout...',
       success: 'Logout Berhasil',
       error: 'Logout Gagal',
-    });
-  };
+    })
+  }
   return (
     <header className="flex sticky top-0 z-40 h-14 items-center gap-4 border-b border-slate-100 bg-white px-4 lg:h-[60px] lg:px-6">
       <Sheet>
@@ -60,7 +66,10 @@ export default function Header({ title }: { title: string }) {
         </SheetTrigger>
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
-            <Link href="#" className="flex items-center gap-2 text-lg font-semibold">
+            <Link
+              href="#"
+              className="flex items-center gap-2 text-lg font-semibold"
+            >
               <IconPackage className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
@@ -77,7 +86,9 @@ export default function Header({ title }: { title: string }) {
             >
               <IconShoppingCart className="h-5 w-5" />
               Orders
-              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">6</Badge>
+              <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                6
+              </Badge>
             </Link>
             <Link
               href="#"
@@ -106,7 +117,8 @@ export default function Header({ title }: { title: string }) {
               <CardHeader>
                 <CardTitle>Upgrade to Pro</CardTitle>
                 <CardDescription>
-                  Unlock all features and get unlimited access to our support team.
+                  Unlock all features and get unlimited access to our support
+                  team.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -119,7 +131,11 @@ export default function Header({ title }: { title: string }) {
         </SheetContent>
       </Sheet>
       <div className="w-full flex-1">
-        <h2 className={'text-sm md:text-xl font-semibold text-slate-700 relative'}>{title}</h2>
+        <h2
+          className={'text-sm md:text-xl font-semibold text-slate-700 relative'}
+        >
+          {title}
+        </h2>
       </div>
 
       <DropdownMenu>
@@ -154,11 +170,14 @@ export default function Header({ title }: { title: string }) {
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={e => handleLogout(e)} className={'text-destructive cursor-pointer'}>
+          <DropdownMenuItem
+            onClick={e => handleLogout(e)}
+            className={'text-destructive cursor-pointer'}
+          >
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
-  );
+  )
 }
