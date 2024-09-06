@@ -34,7 +34,7 @@ const Login = (
 	return (
 		<div className={'flex justify-center h-screen max-h-[95vh] w-full items-center'}>
 			<Head title="Log in" />
-			<div className="w-full md:w-3/12 p-10 shadow-none md:shadow-sm border-none md:border border-slate-100 rounded-md">
+			<div className="w-full md:w-3/12 p-10 shadow-none md:shadow-md border-none md:border border-slate-100 rounded-md">
 				{status && (
 					<div className="mb-4 font-medium text-sm text-green-600">{status}</div>
 				)}
