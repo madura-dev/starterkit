@@ -30,7 +30,7 @@ import {
 import React from 'react'
 import { toast } from 'sonner'
 
-export default function Header({ title }: { title: string }) {
+export default function Header({ title }: { title?: string }) {
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault()
     const logout = new Promise((resolve, reject) => {
